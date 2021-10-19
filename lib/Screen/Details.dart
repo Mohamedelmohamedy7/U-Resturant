@@ -24,7 +24,6 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
     parent: _controller,
     curve: Curves.fastOutSlowIn,
   );
-
   @override
   void dispose() {
     _controller.dispose();
@@ -117,12 +116,9 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                           ],
                         ),
                       ),
-                      // SizedBox(
-                      //   height: 10,
-                      // ),
                       Padding(
                           padding:
-                              EdgeInsets.only(top: 8.0, left: width * 0.05),
+                              EdgeInsets.only(top: 8.0, left: width * 0.05,),
                           child: FadeInImage(
                               imageErrorBuilder: (context, Object exception,
                                   StackTrace? stackTrace) {
@@ -134,8 +130,8 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                                       "assets/images/lgog-removebg-preview.png"),
                                 );
                               },
-                              width: 140,
-                              height: 150,
+                              width: width*0.38,
+                              height: height*0.2,
                               placeholder: AssetImage(
                                 "assets/images/placeholder-category-removebg-preview.png",
                               ),
@@ -152,7 +148,7 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                         size: 18,
                         color: Colors.grey.shade700,
                       ),
-                      SizedBox(
+                     const SizedBox(
                         width: 5,
                       ),
                       Text("${widget.model!.serving} serving",
@@ -170,8 +166,8 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
-                            left: width * 0.05, top: 20, bottom: 15),
-                        child: Align(
+                            left: width * 0.05, top: height*0.03, bottom: height*0.02),
+                        child:const Align(
                           alignment: Alignment.topLeft,
                           child: Text("Ingredients ~ ",
                               style: TextStyle(
@@ -180,9 +176,11 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                               )),
                         ),
                       ),
-                      SizedBox(width: width*0.23,),
+                       SizedBox(
+                        width: width * 0.23,
+                      ),
                       Padding(
-                        padding: EdgeInsets.only( top: 10),
+                        padding: EdgeInsets.only(top: 10),
                         child: TextButton(
                           onPressed: BottomSheetVal,
                           child: ScaleTransition(
@@ -191,12 +189,12 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                               padding: EdgeInsets.all(8.0),
                               child: Row(
                                 children: [
-                                  Text("For Steps",
+                                 const Text("For Steps",
                                       style: TextStyle(
                                         fontSize: 16,
                                         color: accentColor,
                                       )),
-                                  Icon(
+                                const  Icon(
                                     Icons.fast_forward_rounded,
                                     color: accentColor,
                                     size: 20,
@@ -231,8 +229,8 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
     showModalBottomSheet(
         isScrollControlled: true,
         backgroundColor: Colors.grey.shade800,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
+        shape:const RoundedRectangleBorder(
+            borderRadius:const BorderRadius.only(
                 topLeft: Radius.circular(50), topRight: Radius.circular(50))),
         context: context,
         builder: (context) {
@@ -246,7 +244,7 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 15.0),
                         child: InkWell(
-                          child: Divider(
+                          child:const Divider(
                             thickness: 3,
                             color: accentColor,
                           ),
@@ -256,7 +254,7 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                       width: 100,
                     ),
                     Padding(
-                      padding: EdgeInsets.only(right: 0.0),
+                      padding:const EdgeInsets.only(right: 0.0),
                       child: Wrap(
                         spacing: 5.0,
                         runSpacing: 5.0,
@@ -265,7 +263,7 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.only(top: 10.0, left: 25),
+                              padding:const EdgeInsets.only(top: 30.0, left: 25),
                               child: Text(
                                 "${widget.model!.title}\n",
                                 style: TextStyle(
@@ -299,7 +297,7 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                             size: 18,
                             color: Colors.grey.shade400,
                           ),
-                          SizedBox(
+                        const  SizedBox(
                             width: 5,
                           ),
                           Text("${widget.model!.minites} mins",
@@ -318,7 +316,7 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                                   size: 18,
                                   color: Colors.grey.shade400,
                                 ),
-                                SizedBox(
+                              const  SizedBox(
                                   width: 5,
                                 ),
                                 Text("${widget.model!.serving} serving",
@@ -335,13 +333,13 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                     Padding(
                       padding: const EdgeInsets.only(
                           left: 28.0, right: 28, top: 15, bottom: 15),
-                      child: Divider(
+                      child:  Divider(
                         color: Colors.grey.shade400,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 25.0, bottom: 20),
-                      child: Align(
+                      child:const Align(
                         alignment: Alignment.topLeft,
                         child: Text(
                           "Steps",

@@ -12,7 +12,7 @@ class CustemText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text!.length>20?text!.replaceRange(15, text!.length, "..."):"$text", style: TextStyle(
+    return Text(text!.length>15?text!.replaceRange(12, text!.length, "..."):"$text", style: TextStyle(
       color:color,
       fontWeight:fontw,
       letterSpacing:space,

@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:food_app/StatelesssWidget/Constant.dart';
 import 'package:food_app/Screen/auth_Screen/Login_Screen.dart';
 import 'package:food_app/Screen/auth_Screen/Registers_screen.dart';
+import 'package:food_app/providers/Favorite_Provider.dart';
 import 'package:food_app/providers/MealProvider.dart';
 import 'package:food_app/providers/MealProvider_Recommend.dart';
 import 'package:food_app/providers/auth_provdier.dart';
+import 'package:food_app/widget/Search/SearchWidget.dart';
 import 'package:food_app/widget/SeeAllToday.dart';
 import 'package:provider/provider.dart';
 import 'Favorite_Meal.dart';
@@ -13,6 +15,7 @@ import 'Screen/extension_widget/Setting.dart';
 import 'StatelesssWidget/AboutUs.dart';
 import 'Screen/HomePage.dart';
 import 'Screen/splach_screen.dart';
+import 'model/MealModel.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +37,8 @@ class _MyAppState extends State<MyApp> {
           ChangeNotifierProvider.value(value: AuthProvider()),
           ChangeNotifierProvider(create: (_) => MealProvider()),
           ChangeNotifierProvider(create: (_) => MealProviderRecommend()),
+          ChangeNotifierProvider(create: (_) => Meal()),
+          ChangeNotifierProvider(create: (_) => FavoriteProvider()),
         ],
         child: Consumer<AuthProvider>(
             builder: (ctx, auth, _) {
@@ -79,6 +84,7 @@ class _MyAppState extends State<MyApp> {
               '/FavoriteMeal': (context) => FavoriteMeal(),
               '/SeeAllToDayGrid': (context) => SeeAllToDayGrid(),
               '/Setting': (context) => Setting(),
+              '/SearchFilterWidget': (context) => SearchFilterWidget(),
             },
           );
         }));

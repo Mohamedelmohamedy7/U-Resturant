@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/Screen/Details.dart';
 import 'package:food_app/StatelesssWidget/Constant.dart';
- import 'package:food_app/providers/MealProvider_Recommend.dart';
+import 'package:food_app/model/MealModel.dart';
+import 'package:food_app/providers/Favorite_Provider.dart';
+import 'package:food_app/providers/MealProvider_Recommend.dart';
 import 'package:provider/provider.dart';
 
 import 'custem_Text.dart';
@@ -12,6 +14,8 @@ class RecommendedAllToDayGrid extends StatefulWidget {
 }
 
 class _State extends State<RecommendedAllToDayGrid> {
+  Meal? meal;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +59,7 @@ class _State extends State<RecommendedAllToDayGrid> {
                           MaterialPageRoute(
                               builder: (context) => Details(
                                   Provider.of<MealProviderRecommend>(context,
-                                      listen: false)
+                                          listen: false)
                                       .RecommendModel[index]))),
                       child: Container(
                           height: 150,
@@ -68,12 +72,15 @@ class _State extends State<RecommendedAllToDayGrid> {
                                     left: 10.0,
                                   ),
                                   child: FadeInImage(
-                                      imageErrorBuilder: (  context,   Object exception,   StackTrace? stackTrace) {
+                                      imageErrorBuilder: (context,
+                                          Object exception,
+                                          StackTrace? stackTrace) {
                                         print('Error Handler');
                                         return Container(
                                           width: 50,
                                           height: 50,
-                                          child: Image.asset("assets/images/lgog-removebg-preview.png"),
+                                          child: Image.asset(
+                                              "assets/images/lgog-removebg-preview.png"),
                                         );
                                       },
                                       width: 50,
@@ -82,20 +89,21 @@ class _State extends State<RecommendedAllToDayGrid> {
                                         "assets/images/lgog-removebg-preview.png",
                                       ),
                                       image: NetworkImage(
-                                        Provider.of<MealProviderRecommend>(context,
-                                            listen: false)
+                                        Provider.of<MealProviderRecommend>(
+                                                context,
+                                                listen: false)
                                             .RecommendModel[index]
                                             .imageUrl!,
                                       ))),
-                              SizedBox(
-                                width: 15,
+                              const SizedBox(
+                                width: 12,
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.only(top: 20.0),
-                                    child: Align(
+                                    padding: const EdgeInsets.only(top: 20.0),
+                                    child: const Align(
                                       alignment: Alignment.topLeft,
                                       child: CustemText(
                                         text: "Main Dish",
@@ -104,68 +112,60 @@ class _State extends State<RecommendedAllToDayGrid> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   CustemText(
                                     text:
-                                    "${ Provider.of<MealProviderRecommend>(context,
-                                        listen: false)
-                                        .RecommendModel[index].title!}",
+                                        "${Provider.of<MealProviderRecommend>(context, listen: false).RecommendModel[index].title!}",
                                     color: accentColor,
                                     fontsize: 17,
                                     overflow: TextOverflow.clip,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                   CustemText(
                                     text:
-                                    "${ Provider.of<MealProviderRecommend>(context,
-                                        listen: false)
-                                        .RecommendModel[index].calories!} Calories",
+                                        "${Provider.of<MealProviderRecommend>(context, listen: false).RecommendModel[index].calories!} Calories",
                                     color: primaryColor,
                                     fontsize: 13,
                                     fontw: FontWeight.bold,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                   Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                        MainAxisAlignment.spaceAround,
                                     children: [
                                       Row(
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.access_time_rounded,
                                             size: 18,
                                             color: Colors.grey,
                                           ),
                                           Text(
-                                              "${ Provider.of<MealProviderRecommend>(context,
-                                                  listen: false)
-                                                  .RecommendModel[index].minites!} mins",
+                                              "${Provider.of<MealProviderRecommend>(context, listen: false).RecommendModel[index].minites!} mins",
                                               style: TextStyle(
                                                 fontSize: 16,
                                                 color: primaryColor,
                                               )),
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 10,
                                       ),
                                       Row(
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.room_service_outlined,
                                             size: 20,
                                             color: Colors.grey,
                                           ),
                                           Text(
-                                              "${ Provider.of<MealProviderRecommend>(context,
-                                                  listen: false)
-                                                  .RecommendModel[index].serving!}serving",
+                                              "${Provider.of<MealProviderRecommend>(context, listen: false).RecommendModel[index].serving!} serving",
                                               style: TextStyle(
                                                 fontSize: 16,
                                                 color: primaryColor,
@@ -178,23 +178,84 @@ class _State extends State<RecommendedAllToDayGrid> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    bottom: 90.0, left: 10),
-                                child: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.favorite_sharp,
-                                      size: 25,
-                                      color: primaryColor,
-                                    )),
+                                  bottom: 60.0,
+                                  left: 10,
+                                ),
+                                child: Container(
+                                  width: 34,
+                                  height: 33,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: primaryColor,
+                                  ),
+                                  child: IconButton(
+                                      onPressed: () {
+                                        meal = Meal(
+                                          serving: Provider.of<
+                                                      MealProviderRecommend>(
+                                                  context,
+                                                  listen: false)
+                                              .RecommendModel[index]
+                                              .serving!,
+                                          minites: Provider.of<
+                                                      MealProviderRecommend>(
+                                                  context,
+                                                  listen: false)
+                                              .RecommendModel[index]
+                                              .minites,
+                                          calories: Provider.of<
+                                                      MealProviderRecommend>(
+                                                  context,
+                                                  listen: false)
+                                              .RecommendModel[index]
+                                              .calories,
+                                          imageUrl: Provider.of<
+                                                      MealProviderRecommend>(
+                                                  context,
+                                                  listen: false)
+                                              .RecommendModel[index]
+                                              .imageUrl!,
+                                          ingredients: Provider.of<
+                                                      MealProviderRecommend>(
+                                                  context,
+                                                  listen: false)
+                                              .RecommendModel[index]
+                                              .ingredients,
+                                          steps: Provider.of<
+                                                      MealProviderRecommend>(
+                                                  context,
+                                                  listen: false)
+                                              .RecommendModel[index]
+                                              .steps,
+                                          title: Provider.of<
+                                                      MealProviderRecommend>(
+                                                  context,
+                                                  listen: false)
+                                              .RecommendModel[index]
+                                              .title,
+                                        );
+                                        Provider.of<FavoriteProvider>(context,
+                                                listen: false)
+                                            .insertFav(
+                                          meal!,
+                                        );
+                                      },
+                                      icon: const Icon(
+                                        Icons.favorite_outlined,
+                                        size: 18,
+                                        color: Colors.white,
+                                      )),
+                                ),
                               ),
                             ],
                           )),
                     ),
                   );
                 },
-                itemCount:  Provider.of<MealProviderRecommend>(context,
-                    listen: false)
-                    .RecommendModel.length),
+                itemCount:
+                    Provider.of<MealProviderRecommend>(context, listen: false)
+                        .RecommendModel
+                        .length),
           ),
         ),
       ),

@@ -1,22 +1,30 @@
 import 'dart:ui';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:food_app/Screen/Details.dart';
+ import 'package:food_app/Screen/Details.dart';
+import 'package:food_app/model/MealModel.dart';
+import 'package:food_app/providers/Favorite_Provider.dart';
 import 'package:food_app/providers/MealProvider.dart';
 import 'package:food_app/widget/custem_Text.dart';
 import 'package:provider/provider.dart';
- import '../StatelesssWidget/Constant.dart';
+import '../StatelesssWidget/Constant.dart';
 import 'SeeAllToday.dart';
 
 class SeeAllToDay extends StatefulWidget {
-  const SeeAllToDay({Key? key}) : super(key: key);
+  Meal? meal;
 
   @override
   State<SeeAllToDay> createState() => _SeeAllToDayState();
 }
 
 class _SeeAllToDayState extends State<SeeAllToDay> {
+  FavoriteProvider _helper = FavoriteProvider();
+
+  @override
+  void initState() {
+    _helper.geFavoriteDb();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -24,19 +32,20 @@ class _SeeAllToDayState extends State<SeeAllToDay> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Align(
+            const Align(
               alignment: Alignment.topLeft,
-              child: CustemText(
-                text: "Today Fresh Recipes",
+              child: Text("Today Fresh Recipes",style: TextStyle(
                 color: Colors.white,
-                fontsize: 20,
+                fontSize: 20,
+
+              )
               ),
             ),
             Padding(
                 padding: const EdgeInsets.only(right: 30),
                 child: TextButton(
-                  child: Text("See All",
-                      style: TextStyle(
+                  child:const Text("See All",
+                      style:const TextStyle(
                         color: primaryColor,
                         fontSize: 18,
                       )),
@@ -46,7 +55,7 @@ class _SeeAllToDayState extends State<SeeAllToDay> {
           ],
         ),
         Padding(
-          padding: EdgeInsets.only(top: 10, right: 10),
+          padding:const EdgeInsets.only(top: 10, right: 10),
           child: Container(
             width: double.infinity,
             height: 230,
@@ -77,35 +86,95 @@ class _SeeAllToDayState extends State<SeeAllToDay> {
                                   children: [
                                     Padding(
                                       padding:
-                                          const EdgeInsets.only(bottom: 50.0),
-                                      child: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.favorite_sharp,
-                                            size: 25,
+                                          const EdgeInsets.only(bottom: 30.0,left: 10,right: 5),
+                                      child:Container(
+                                          width: 34,
+                                          height: 33,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
                                             color: primaryColor,
+                                          ),
+                                        child: IconButton(
+                                            onPressed: () {
+                                              widget.meal = Meal(
+                                                serving:
+                                                    Provider.of<MealProvider>(
+                                                            context,
+                                                            listen: false)
+                                                        .Model[index]
+                                                        .serving!,
+                                                minites:
+                                                    Provider.of<MealProvider>(
+                                                            context,
+                                                            listen: false)
+                                                        .Model[index]
+                                                        .minites,
+                                                calories:
+                                                    Provider.of<MealProvider>(
+                                                            context,
+                                                            listen: false)
+                                                        .Model[index]
+                                                        .calories,
+                                                imageUrl:
+                                                    Provider.of<MealProvider>(
+                                                            context,
+                                                            listen: false)
+                                                        .Model[index]
+                                                        .imageUrl!,
+                                                ingredients:
+                                                    Provider.of<MealProvider>(
+                                                            context,
+                                                            listen: false)
+                                                        .Model[index]
+                                                        .ingredients,
+                                                steps: Provider.of<MealProvider>(
+                                                        context,
+                                                        listen: false)
+                                                    .Model[index]
+                                                    .steps,
+                                                title: Provider.of<MealProvider>(
+                                                        context,
+                                                        listen: false)
+                                                    .Model[index]
+                                                    .title,
+                                              );
+                                              Provider.of<FavoriteProvider>(context,listen: false)
+                                                  .insertFav(widget.meal!);
+
+                                            },
+                                            icon:const Icon(
+                                              Icons.favorite,
+                                              size: 18,
+                                              color: Colors.white,
+                                            )),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 4.0),
+                                      child: FadeInImage(
+                                          imageErrorBuilder: (context,
+                                              Object exception,
+                                              StackTrace? stackTrace) {
+                                            print('Error Handler');
+                                            return Container(
+                                              width: 120,
+                                              height: 100,
+                                              child: Image.asset(
+                                                  "assets/images/lgog-removebg-preview.png"),
+                                            );
+                                          },
+                                          width: 120,
+                                          height: 100,
+                                          placeholder: AssetImage(
+                                            "assets/images/lgog-removebg-preview.png",
+                                          ),
+                                          image: NetworkImage(
+                                            Provider.of<MealProvider>(context,
+                                                    listen: false)
+                                                .Model[index]
+                                                .imageUrl!,
                                           )),
                                     ),
-                                    FadeInImage(
-                                        imageErrorBuilder: (  context,   Object exception,   StackTrace? stackTrace) {
-                                          print('Error Handler');
-                                          return Container(
-                                            width: 120,
-                                            height: 100,
-                                            child: Image.asset("assets/images/lgog-removebg-preview.png"),
-                                          );
-                                        },
-                                          width: 120,
-                                        height: 100,
-                                        placeholder: AssetImage(
-                                          "assets/images/lgog-removebg-preview.png",
-                                        ),
-                                        image: NetworkImage(Provider.of<MealProvider>(context,
-                                                  listen: false)
-                                              .Model[index]
-                                              .imageUrl!,
-                                        )),
-
                                   ],
                                 ),
                                 Padding(
@@ -144,12 +213,12 @@ class _SeeAllToDayState extends State<SeeAllToDay> {
                                     children: [
                                       Row(
                                         children: [
-                                          Icon(
+                                          const  Icon(
                                             Icons.access_time_rounded,
                                             size: 15,
                                             color: Colors.grey,
                                           ),
-                                          SizedBox(
+                                          const   SizedBox(
                                             width: 3,
                                           ),
                                           Text(
@@ -198,9 +267,10 @@ class _SeeAllToDayState extends State<SeeAllToDay> {
       ],
     );
   }
-  Imageerror(){
-    return Image.asset(
-      "assets/images/lgog-removebg-preview.png",
-    );
-  }
+
+  // void insertFav(Meal meal) {
+  //   _helper
+  //       .insertFavorite(meal)
+  //       .then((value) => value != null ? print("Done") : print("error"));
+  // }
 }

@@ -1,4 +1,8 @@
-class Meal {
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
+class Meal with ChangeNotifier {
+  int? id;
   String? title;
   String? calories;
   String? ingredients;
@@ -6,8 +10,8 @@ class Meal {
   String? serving;
   String? imageUrl;
   String? minites;
-
-  Meal({
+   Meal({
+    this.id,
     this.title,
     this.calories,
     this.ingredients,
@@ -19,8 +23,9 @@ class Meal {
 
   Meal.fromjson(Map<String, dynamic> map) {
     if (map == null) {
-     print("===>null");
+      print("===>null");
     }
+    id = map["id"];
     title = map["title"];
     calories = map["caliores"];
     ingredients = map["ingrediants"];
@@ -28,17 +33,24 @@ class Meal {
     serving = map["servising"];
     imageUrl = map["imageUrl"];
     minites = map["minites"];
-  }
+    minites = map["minites"];
+   }
 
-  toJson() {
+  toJsonData() {
     return {
-      calories: "calories",
-      ingredients: "ingredients",
-      steps: "steps",
-      serving: "serving",
-      imageUrl: "imageUrl",
-       title: "title",
-      minites: "minites",
-    };
+      "id": id,
+      "caliores": calories,
+      "ingrediants": ingredients,
+      "steps": steps,
+      "servising": serving,
+      "imageUrl": imageUrl,
+      "title": title,
+      "minites": minites,
+     };
+  }
+  @override
+  String toString() {
+    // TODO: implement toString
+    return "$id $serving $title $calories $minites ";
   }
 }

@@ -4,7 +4,6 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:food_app/StatelesssWidget/Constant.dart';
 import 'package:food_app/widget/custem_Text.dart';
 import 'package:lottie/lottie.dart';
-
 import 'CustemDrawer.dart';
 
 class Setting extends StatefulWidget {
@@ -18,8 +17,7 @@ class _SettingState extends State<Setting> with TickerProviderStateMixin {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   var _selected;
-  var _selected1;
-  late final AnimationController _controller = AnimationController(
+   late final AnimationController _controller = AnimationController(
       duration: const Duration(seconds: 1),
       vsync: this,
       lowerBound: 0.5,
@@ -51,8 +49,7 @@ class _SettingState extends State<Setting> with TickerProviderStateMixin {
         leading: Padding(
           padding: const EdgeInsets.only(left: 20.0),
           child: IconButton(icon: Icon(
-            Icons.arrow_back_ios_rounded, size: 20, color: primaryColor,)
-              ,
+            Icons.arrow_back_ios_rounded, size: 20, color: primaryColor,),
               onPressed: () =>
                   Navigator.of(context).pushReplacementNamed("/HomePage"),
               ),
@@ -61,7 +58,7 @@ class _SettingState extends State<Setting> with TickerProviderStateMixin {
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Lottie.asset("assets/images/logo.json",
-                width: 100, height: 120, repeat: false),
+                width: 100, height: 120, repeat: true),
           ),
         ],
       ),
@@ -75,7 +72,7 @@ class _SettingState extends State<Setting> with TickerProviderStateMixin {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Align(
+                  const  Align(
                     alignment: Alignment.topLeft,
                     child: CustemText(
                       text: "Settings",
@@ -156,7 +153,7 @@ class _SettingState extends State<Setting> with TickerProviderStateMixin {
             ),
             Padding(
               padding: const EdgeInsets.only(right: 30.0, left: 30, top: 30),
-              child: Divider(
+              child:  Divider(
                 height: 2,
                 color: Colors.grey.shade500,
               ),
@@ -227,7 +224,7 @@ class _SettingState extends State<Setting> with TickerProviderStateMixin {
                       ],
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 20.0, right: 30, left: 20),
+                      padding:const EdgeInsets.only(top: 20.0, right: 30, left: 20),
                       child: Divider(height: 2, color: accentColor,),
                     ),
                     Row(

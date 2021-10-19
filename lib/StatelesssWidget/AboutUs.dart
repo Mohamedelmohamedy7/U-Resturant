@@ -34,33 +34,33 @@ class AboutUs extends StatelessWidget {
                       Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
-                          padding: EdgeInsets.only(bottom: 120.0),
+                          padding:const EdgeInsets.only(bottom: 170.0),
                           child: IconButton(
                               onPressed: () => Navigator.of(context)
                                   .pushReplacementNamed("/HomePage"),
-                              icon: Icon(
+                              icon:const Icon(
                                 Icons.arrow_back_ios_rounded,
                                 color: primaryColor,
                                 size: 22,
                               )),
                         ),
                       ),
-                      SizedBox(
+                      const  SizedBox(
                         width: 40,
                       ),
                       Lottie.asset("assets/images/logo.json",
                           width: 200,
                           height: 200,
                           reverse: true,
-                          repeat: false),
+                          repeat: true),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0,right: 10,bottom: 40),
-                    child:  Text(
+                    child:const  Text(
                       "Bonjour,,\n\n Hope Our App be useful in our App You can access to ingredients of any meal ,"
                       "Be sure if You  do all steps true you wail have awesome meal , ingredients taken from more "
                       "popular Chef in the world with our app you don't need to search in the internet in thousand of website "
@@ -77,9 +77,9 @@ class AboutUs extends StatelessWidget {
                           " a respect for the gifts of the earth. It is a form of worship,"
                           " a way of giving thanks.\n\n This is often accomplished with an illustration or infographic that presents your business model in an easy-to-digest manner,"
                           " like this one used by Taluma Totes that explains how they source materials for their products and how donations help support the country of origin.""",
-                      style: TextStyle(
+                      style:const TextStyle(
                           fontSize: 15.5,
-                          color: Colors.grey.shade700,
+                          color: Colors.white60,
                           overflow: TextOverflow.visible,
                           letterSpacing: 2),
                     ),

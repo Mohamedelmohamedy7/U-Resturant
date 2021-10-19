@@ -2,32 +2,26 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/model/MealModel.dart';
 
-class MealProviderRecommend extends ChangeNotifier{
-  List<Meal> get RecommendModel=>_RecommendModel;
-  List<Meal> _RecommendModel=[];
-  var  loading ;
+class MealProviderRecommend extends ChangeNotifier {
+  List<Meal> get RecommendModel => _RecommendModel;
+  List<Meal> _RecommendModel = [];
 
-  getDataRecommend()   {
-
-    CollectionReference _collectionReference =FirebaseFirestore.instance.collection("Recommended");
+  getDataRecommend() {
+    CollectionReference _collectionReference =
+        FirebaseFirestore.instance.collection("Recommended");
     try {
-      loading=true;
       _collectionReference.get().then((value) {
-        loading=false;
         _RecommendModel.clear();
         for (int i = 0; i < value.docs.length; i++) {
-          _RecommendModel.add(
+           _RecommendModel.add(
               Meal.fromjson(value.docs[i].data() as Map<String, dynamic>));
         }
-        loading=false;
-        print(RecommendModel[2].imageUrl);
-        print("the length is = ${RecommendModel.length}");
+        notifyListeners();
+        print('_RecommendModel[0].id = ${_RecommendModel[0].calories}');
       });
-    }catch(e){
+    } catch (e) {
       print(e);
     }
     notifyListeners();
   }
-
-
 }

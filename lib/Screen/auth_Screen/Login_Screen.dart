@@ -1,14 +1,11 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:food_app/model/http_exception.dart';
-import 'package:food_app/providers/MealProvider.dart';
 import 'package:food_app/providers/auth_provdier.dart';
 import 'package:food_app/widget/custem_Text.dart';
 import 'package:provider/provider.dart';
-
 import '../../StatelesssWidget/Constant.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -25,8 +22,8 @@ class _RegistersState extends State<LoginScreen> {
     if (!_globalKey.currentState!.validate()) {
       return;
     }
-    FocusScope.of(context).unfocus(); //عشان ااخلي ال كيبورد يقفل لوحدة
-    _globalKey.currentState!.save(); //seve للقيم ال داخلة عندى
+    FocusScope.of(context).unfocus();
+    _globalKey.currentState!.save();
 
     try {
       loading = true;
@@ -111,8 +108,8 @@ class _RegistersState extends State<LoginScreen> {
             child: Column(
               children: [
                 Padding(
-                  padding:  EdgeInsets.only(top: height*0.16),
-                  child:const CustemText(
+                  padding: EdgeInsets.only(top: height * 0.16),
+                  child: const CustemText(
                     text: "Sign In",
                     fontsize: 28,
                     color: accentColor,
@@ -120,11 +117,11 @@ class _RegistersState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: height*0.13,
+                  height: height * 0.13,
                 ),
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: width*0.08),
-                  child:  TextFormField(
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.08),
+                  child: TextFormField(
                     cursorHeight: 28,
                     validator: (val) {
                       if (val!.isEmpty) {
@@ -162,10 +159,10 @@ class _RegistersState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: height *0.03,
+                  height: height * 0.03,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: width*0.08),
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.08),
                   child: TextFormField(
                     validator: (val) {
                       if (val!.isEmpty) {
@@ -217,7 +214,7 @@ class _RegistersState extends State<LoginScreen> {
                 loading == true
                     ? Center(
                         child: Padding(
-                          padding: EdgeInsets.only(top: height*0.25),
+                          padding: EdgeInsets.only(top: height * 0.25),
                           child: SpinKitFadingCircle(
                             color: primaryColor,
                             duration: Duration(seconds: 1),
@@ -229,7 +226,10 @@ class _RegistersState extends State<LoginScreen> {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(
-                                top: height*0.1, right: width*0.07, left: width*0.07,),
+                              top: height * 0.1,
+                              right: width * 0.07,
+                              left: width * 0.07,
+                            ),
                             child: Container(
                               width: double.infinity,
                               height: 50,
@@ -248,7 +248,9 @@ class _RegistersState extends State<LoginScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: height*0.15,),
+                          SizedBox(
+                            height: height * 0.15,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

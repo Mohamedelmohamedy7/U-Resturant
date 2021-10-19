@@ -1,12 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:food_app/model/http_exception.dart';
 import 'package:food_app/providers/auth_provdier.dart';
 import 'package:food_app/widget/custem_Text.dart';
 import 'package:provider/provider.dart';
-
 import '../../StatelesssWidget/Constant.dart';
 
 class Registers extends StatefulWidget {
@@ -29,14 +27,14 @@ class _RegistersState extends State<Registers> {
     if (!_globalKey.currentState!.validate()) {
       return;
     }
-    FocusScope.of(context).unfocus(); //عشان ااخلي ال كيبورد يقفل لوحدة
-    _globalKey.currentState!.save(); //seve للقيم ال داخلة عندى
+    FocusScope.of(context).unfocus();
+    _globalKey.currentState!.save();
     loading = true;
     try {
       await Provider.of<AuthProvider>(context, listen: false)
           .signup(_register_Data["email"]!, _register_Data["password"]!)
           .then((value) {
-        Timer(Duration(seconds: 2), (){
+        Timer(Duration(seconds: 2), () {
           loading = false;
           Navigator.of(context).pushReplacementNamed("/HomePage");
         });
@@ -73,7 +71,7 @@ class _RegistersState extends State<Registers> {
               TextButton(
                   onPressed: () {
                     setState(() {
-                      loading=false;
+                      loading = false;
                     });
                     Navigator.of(ctx).pop();
                   },
@@ -82,8 +80,10 @@ class _RegistersState extends State<Registers> {
           );
         });
   }
+
   var width;
   var height;
+
   @override
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width;
@@ -109,7 +109,7 @@ class _RegistersState extends State<Registers> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: height*0.16),
+                  padding: EdgeInsets.only(top: height * 0.16),
                   child: CustemText(
                     text: "Register",
                     fontsize: 28,
@@ -121,7 +121,7 @@ class _RegistersState extends State<Registers> {
                   height: 40,
                 ),
                 Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: width*0.08),
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.08),
                   child: TextFormField(
                     validator: (val) {
                       if (val!.isEmpty) {
@@ -159,10 +159,10 @@ class _RegistersState extends State<Registers> {
                   ),
                 ),
                 SizedBox(
-                  height:  height*0.035,
+                  height: height * 0.035,
                 ),
                 Padding(
-                  padding:   EdgeInsets.symmetric(horizontal:  width*0.08),
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.08),
                   child: TextFormField(
                     validator: (val) {
                       if (val!.isEmpty) {
@@ -200,10 +200,10 @@ class _RegistersState extends State<Registers> {
                   ),
                 ),
                 SizedBox(
-                  height: height*0.035,
+                  height: height * 0.035,
                 ),
                 Padding(
-                  padding:   EdgeInsets.symmetric(horizontal: width*0.08),
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.08),
                   child: TextFormField(
                     validator: (val) {
                       if (val!.isEmpty) {
@@ -228,10 +228,10 @@ class _RegistersState extends State<Registers> {
                         ),
                         suffixIcon: IconButton(
                             icon: visable == true
-                                ? Icon(Icons. visibility_outlined,
+                                ? Icon(Icons.visibility_outlined,
                                     size: 22, color: primaryColor)
                                 : Icon(Icons.visibility_off_outlined,
-                                    size: 22, color:Colors.grey.shade400 ),
+                                    size: 22, color: Colors.grey.shade400),
                             onPressed: () {
                               setState(() {
                                 visable = !visable;
@@ -255,7 +255,7 @@ class _RegistersState extends State<Registers> {
                 loading == true
                     ? Center(
                         child: Padding(
-                          padding:   EdgeInsets.only(top:  height*0.25),
+                          padding: EdgeInsets.only(top: height * 0.25),
                           child: SpinKitFadingCircle(
                             color: primaryColor,
                             duration: Duration(seconds: 1),
@@ -266,8 +266,10 @@ class _RegistersState extends State<Registers> {
                     : Column(
                         children: [
                           Padding(
-                            padding:   EdgeInsets.only(
-                                top: height*0.1, right: width*0.07, left: width*0.07),
+                            padding: EdgeInsets.only(
+                                top: height * 0.1,
+                                right: width * 0.07,
+                                left: width * 0.07),
                             child: Container(
                               width: double.infinity,
                               height: 50,
@@ -286,7 +288,7 @@ class _RegistersState extends State<Registers> {
                               ),
                             ),
                           ),
-                          SizedBox(height: height*0.08),
+                          SizedBox(height: height * 0.08),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

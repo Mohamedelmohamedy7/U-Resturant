@@ -47,6 +47,10 @@ dependencies:
   flutter_switch:
   cached_network_image:
   flutter_image:
+  page_transition:
+  sqflite:
+  fluttertoast:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

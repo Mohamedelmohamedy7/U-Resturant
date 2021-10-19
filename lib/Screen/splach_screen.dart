@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
 import '../StatelesssWidget/Constant.dart';
-import 'auth_Screen/Login_Screen.dart';
 
 class SplachScreen extends StatefulWidget {
-  static final String  routName="SplachScreen";
 
   @override
   _splachScreenState createState() => _splachScreenState();
@@ -33,7 +30,7 @@ class _splachScreenState extends State<SplachScreen> {
               Lottie.asset("assets/images/logo.json",
                   width: 400, height: 500, reverse: true, ),
               Padding(
-                padding: EdgeInsets.only(
+                padding:const EdgeInsets.only(
                   right: 30,
                   left: 30,
                 ),
@@ -43,7 +40,7 @@ class _splachScreenState extends State<SplachScreen> {
                   decoration: BoxDecoration(
                       color: primaryColor,
                       borderRadius: BorderRadius.circular(15)),
-                  child: FlatButton(
+                  child: TextButton(
                     onPressed: ()=>Navigator.of(context).pushReplacementNamed("/Registers"),
                     child: const Text(
                       "Register",
