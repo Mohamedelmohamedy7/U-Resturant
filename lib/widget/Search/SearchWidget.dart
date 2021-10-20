@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/Screen/Details.dart';
@@ -65,76 +66,80 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
     height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.black,
-      body: SingleChildScrollView(
+      body:  SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
         child: SafeArea(
-          child: Column(children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: EdgeInsets.only(
-                    left: width * 0.01),
-                child: IconButton(
-                    onPressed: () =>Navigator.of(context).push(PageTransition(
-                      type: PageTransitionType.rightToLeft,child: HomePage()
-                    )),
-                    icon: Icon(
-                      Icons.arrow_back_ios_rounded,
-                      color: primaryColor,
-                      size: 22,
-                    )),
+            child: Column(children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: width * 0.01),
+                  child: IconButton(
+                      onPressed: () =>Navigator.of(context).push(PageTransition(
+                        type: PageTransitionType.rightToLeft,child: HomePage()
+                      )),
+                      icon: Icon(
+                        Icons.arrow_back_ios_rounded,
+                        color: primaryColor,
+                        size: 22,
+                      )),
+                ),
               ),
-            ),
-            SizedBox(height: 15,),
-              Container(
-                width: width * 0.9,
-                child: TextField(
-                  style: TextStyle(color: Colors.white,fontSize: 18),
-                  cursorHeight: 23,
-                   cursorWidth: 3,
-                  cursorColor: Colors.white,
-                  onChanged: (val) {
-                    setState(() {
-                      initalSearch(val);
-                    });
-                  },
-                  decoration: InputDecoration(
-                    focusedBorder: UnderlineInputBorder(
+              SizedBox(height: 15,),
+                Container(
+                  width: width * 0.9,
+                  child: TextField(
+                    style: TextStyle(color: Colors.white,fontSize: 18),
+                    cursorHeight: 23,
+                     cursorWidth: 3,
+                    cursorColor: Colors.white,
+                    onChanged: (val) {
+                      setState(() {
+                        initalSearch(val);
+                      });
+                    },
+                    decoration: InputDecoration(
+                      focusedBorder: UnderlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(color: Colors.grey.shade800)),
+                      enabledBorder: UnderlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(color: Colors.grey.shade800)),
-                    enabledBorder: UnderlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(color: Colors.grey.shade800),
-                    ),
-                    prefixIcon:const Icon(
-                      Icons.search_rounded,
-                      color: Colors.white38,
-                      size: 25,
-                    ),
-                    fillColor: Colors.grey.shade800,
-                    filled: true,
-                    hintText: "Search for recipes",
-                    hintStyle:
-                        TextStyle(color: Colors.grey.shade500, fontSize: 19),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(color: Colors.grey.shade800),
+                      ),
+                      prefixIcon:const Icon(
+                        Icons.search_rounded,
+                        color: Colors.white38,
+                        size: 25,
+                      ),
+                      fillColor: Colors.grey.shade800,
+                      filled: true,
+                      hintText: "Search for recipes",
+                      hintStyle:
+                          TextStyle(color: Colors.grey.shade500, fontSize: 19),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            const  SizedBox(height: 30,),
-              Container(
-                  width: width * 1,
-                  height: height * 0.9,
-                  child: ListView(
-                    physics: NeverScrollableScrollPhysics(),
-                    children: tempSearchStore.map((elemnt) {
-                      return buildResultCard(elemnt);
-                    }).toList(),
-                  ))
-            ]),
-        ),
+              const  SizedBox(height: 30,),
+                 Padding(
+                   padding: const EdgeInsets.only(bottom: 8.0),
+                   child: Container(
+                         width: width * 1,
+                        height: height * 0.75,
+                        child: ListView(
+                           children: tempSearchStore.map((elemnt) {
+                            return buildResultCard(elemnt);
+                          }).toList(),
+                        )),
+                 ),
 
+              ]),
+          ),
       ),
+      
     );
   }
 
@@ -154,26 +159,20 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
               ),
               child: Row(
                 children: [
-                  FadeInImage(
-                    imageErrorBuilder:
-                        (context, Object exception, StackTrace? stackTrace) {
-                      print('Error Handler');
-                      return Container(
-                        width: width * 0.25,
-                        height: height * 0.3,
-                        child: Image.asset(
-                            "assets/images/lgog-removebg-preview.png"),
-                      );
-                    },
+                  CachedNetworkImage(
                     width: width * 0.25,
                     height: height * 0.3,
-                    placeholder: AssetImage(
-                      "assets/images/lgog-removebg-preview.png",
-                    ),
-                    image: NetworkImage(
-                      elemnt["imageUrl"],
+                    imageUrl:  elemnt["imageUrl"],
+                    placeholder: (ctx, index) =>
+                        Image.asset(
+                          "assets/images/lgog-removebg-preview.png",
+                        ),
+                    errorWidget: (ctx, s, w) => Container(
+                      child: Image.asset(
+                          "assets/images/lgog-removebg-preview.png"),
                     ),
                   ),
+
                     SizedBox(
                     width: width * 0.03,
                   ),

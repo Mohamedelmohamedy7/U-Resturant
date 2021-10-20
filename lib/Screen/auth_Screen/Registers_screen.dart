@@ -228,10 +228,10 @@ class _RegistersState extends State<Registers> {
                         ),
                         suffixIcon: IconButton(
                             icon: visable == true
-                                ? Icon(Icons.visibility_outlined,
-                                    size: 22, color: primaryColor)
-                                : Icon(Icons.visibility_off_outlined,
-                                    size: 22, color: Colors.grey.shade400),
+                                ? Icon(Icons.visibility_off_outlined,
+                                    size: 22, color: Colors.grey.shade400)
+                                : Icon(Icons.visibility_outlined,
+                                    size: 22, color:primaryColor ),
                             onPressed: () {
                               setState(() {
                                 visable = !visable;

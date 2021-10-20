@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
  import 'package:food_app/Screen/Details.dart';
 import 'package:food_app/StatelesssWidget/Constant.dart';
@@ -71,29 +72,23 @@ class _State extends State<SeeAllToDayGrid> {
                                   padding: const EdgeInsets.only(
                                     left: 10.0,
                                   ),
-                                  child: FadeInImage(
-                                      imageErrorBuilder: (context,
-                                          Object exception,
-                                          StackTrace? stackTrace) {
-                                        print('Error Handler');
-                                        return Container(
-                                          width: 50,
-                                          height: 50,
-                                          child: Image.asset(
-                                              "assets/images/lgog-removebg-preview.png"),
-                                        );
-                                      },
-                                      width: 50,
-                                      height: 50,
-                                      placeholder: AssetImage(
-                                        "assets/images/lgog-removebg-preview.png",
-                                      ),
-                                      image: NetworkImage(
-                                        Provider.of<MealProvider>(context,
-                                                listen: false)
-                                            .Model[index]
-                                            .imageUrl!,
-                                      ))),
+                                  child: CachedNetworkImage(
+                                    width: 50,
+                                    height: 50,
+                                    imageUrl:
+                                      Provider.of<MealProvider>(context,
+                                          listen: false)
+                                          .Model[index]
+                                          .imageUrl!,
+                                    placeholder: (ctx,index)=>  Image.asset(
+                                      "assets/images/lgog-removebg-preview.png",
+                                    ),
+                                    errorWidget:(ctx,s,w)=> Container(
+                                      child: Image.asset(
+                                          "assets/images/lgog-removebg-preview.png"),
+                                    ),
+                                  )
+                              ),
                               const  SizedBox(
                                 width: 12,
                               ),
@@ -249,6 +244,5 @@ class _State extends State<SeeAllToDayGrid> {
         ),
       ),
     );
-    ;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/Screen/Details.dart';
@@ -57,28 +58,23 @@ class _RecommendedMealsState extends State<RecommendedMeals> {
                         color: Colors.grey.shade800,
                         child: Row(
                           children: [
-                            FadeInImage(
-                                imageErrorBuilder: (context, Object exception,
-                                    StackTrace? stackTrace) {
-                                  print('Error Handler');
-                                  return Container(
-                                    width: width * 0.25,
-                                    height: height * 0.3,
-                                    child: Image.asset(
-                                        "assets/images/lgog-removebg-preview.png"),
-                                  );
-                                },
+                            CachedNetworkImage(
+                              width: width * 0.25,
+                              height: height * 0.3,
+                              imageUrl:Provider.of<MealProviderRecommend>(context,
+                                listen: false)
+                                .RecommendModel[index]
+                                .imageUrl!,
+                              placeholder: (ctx,index)=>  Image.asset(
+                                "assets/images/lgog-removebg-preview.png",
+                              ),
+                              errorWidget:(ctx,s,w)=> Container(
                                 width: width * 0.25,
                                 height: height * 0.3,
-                                placeholder: AssetImage(
-                                  "assets/images/lgog-removebg-preview.png",
-                                ),
-                                image: NetworkImage(
-                                  Provider.of<MealProviderRecommend>(context,
-                                          listen: false)
-                                      .RecommendModel[index]
-                                      .imageUrl!,
-                                )),
+                                child: Image.asset(
+                                    "assets/images/lgog-removebg-preview.png"),
+                              ),
+                            ),
                             SizedBox(
                               width: width * 0.03,
                             ),

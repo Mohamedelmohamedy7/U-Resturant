@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
  import 'package:food_app/Screen/Details.dart';
 import 'package:food_app/model/MealModel.dart';
@@ -151,29 +152,22 @@ class _SeeAllToDayState extends State<SeeAllToDay> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 4.0),
-                                      child: FadeInImage(
-                                          imageErrorBuilder: (context,
-                                              Object exception,
-                                              StackTrace? stackTrace) {
-                                            print('Error Handler');
-                                            return Container(
-                                              width: 120,
-                                              height: 100,
-                                              child: Image.asset(
-                                                  "assets/images/lgog-removebg-preview.png"),
-                                            );
-                                          },
-                                          width: 120,
-                                          height: 100,
-                                          placeholder: AssetImage(
-                                            "assets/images/lgog-removebg-preview.png",
-                                          ),
-                                          image: NetworkImage(
-                                            Provider.of<MealProvider>(context,
-                                                    listen: false)
-                                                .Model[index]
-                                                .imageUrl!,
-                                          )),
+                                      child:  CachedNetworkImage(
+                                        width: 120,
+                                        height: 100,
+                                        imageUrl:
+                                        Provider.of<MealProvider>(context,
+                                            listen: false)
+                                            .Model[index]
+                                            .imageUrl!,
+                                        placeholder: (ctx,index)=>  Image.asset(
+                                          "assets/images/lgog-removebg-preview.png",
+                                        ),
+                                        errorWidget:(ctx,s,w)=> Container(
+                                          child: Image.asset(
+                                              "assets/images/lgog-removebg-preview.png"),
+                                        ),
+                                      )
                                     ),
                                   ],
                                 ),

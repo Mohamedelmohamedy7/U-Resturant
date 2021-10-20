@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/StatelesssWidget/Constant.dart';
@@ -119,23 +120,21 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                       Padding(
                           padding:
                               EdgeInsets.only(top: 8.0, left: width * 0.05,),
-                          child: FadeInImage(
-                              imageErrorBuilder: (context, Object exception,
-                                  StackTrace? stackTrace) {
-                                print('Error Handler');
-                                return Container(
-                                  width: 140,
-                                  height: 150,
-                                  child: Image.asset(
-                                      "assets/images/lgog-removebg-preview.png"),
-                                );
-                              },
-                              width: width*0.38,
-                              height: height*0.2,
-                              placeholder: AssetImage(
-                                "assets/images/placeholder-category-removebg-preview.png",
-                              ),
-                              image: NetworkImage("${widget.model!.imageUrl}")))
+                          child: CachedNetworkImage(
+                            width: 140,
+                            height: 150,
+                            imageUrl:
+                            "${widget.model!.imageUrl}",
+                            placeholder: (ctx,index)=>  Image.asset(
+                              "assets/images/lgog-removebg-preview.png",
+                            ),
+                            errorWidget:(ctx,s,w)=> Container(
+                              child: Image.asset(
+                                  "assets/images/lgog-removebg-preview.png"),
+                            ),
+                          )
+
+                      )
                     ]),
                 Padding(
                   padding: EdgeInsets.only(

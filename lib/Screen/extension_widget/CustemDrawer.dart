@@ -92,7 +92,7 @@ class Custem_Drwaer extends StatefulWidget{
                            Provider.of<AuthProvider>(context, listen: false)
                                .logout()
                                .then((value) async {
-                             Timer(Duration(seconds: 4), () {
+                             Timer(Duration(seconds: 2), () {
                                loading = false;
                                Navigator.of(context).pushReplacementNamed(
                                    "/LoginScreen");
@@ -103,7 +103,7 @@ class Custem_Drwaer extends StatefulWidget{
                          }
                          }),
 
-                       const   SizedBox(height: 15,),
+                       const SizedBox(height: 15,),
                      ],
                    ),
                  )
