@@ -46,8 +46,7 @@ class MyApp extends StatelessWidget{
                       () {
                     return Provider.of<MealProviderRecommend>(ctx, listen: false).getDataRecommend();
                   });
-          print("Auth is ${auth.isAuth}");
-          return MaterialApp(
+           return MaterialApp(
             title: 'Flutter Demo',
             theme: ThemeData(
               primaryColor: Theme.of(context).primaryColor,

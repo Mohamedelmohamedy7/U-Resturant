@@ -54,8 +54,7 @@ class _RegistersState extends State<Registers> {
       }
       _showErrordialog(error_message);
     } catch (error) {
-      print(error);
-      const error_message = "could not authenticate you ,try again later";
+       const error_message = "could not authenticate you ,try again later";
       _showErrordialog(error_message);
     }
   }

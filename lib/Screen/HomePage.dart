@@ -24,16 +24,9 @@ class _HomePageState extends State<HomePage> {
 
   var width;
   var height;
-  FavoriteProvider _helper = FavoriteProvider();
-
-  @override
-  void initState() {
-    _helper.geFavoriteDb();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
+    Provider.of<FavoriteProvider>(context).geFavoriteDb();
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
     return RefreshIndicator(

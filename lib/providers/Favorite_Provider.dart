@@ -9,7 +9,7 @@ class FavoriteProvider extends ChangeNotifier{
   Future<String> getDbPath() async {
     var dbPath = await getDatabasesPath();
     var favoriteDbPath = dbPath + "/" + Constants.DB_NAME;
-    // print(noteDbPath);
+
     notifyListeners();
     return favoriteDbPath;
   }
@@ -28,7 +28,6 @@ class FavoriteProvider extends ChangeNotifier{
       //create table
       String sql =
       'create table ${Constants.TABLE_NAME} ( ${Constants.COL_ID} integer primary key autoincrement, ${Constants.COL_TITLE} text, ${Constants.COL_STEPS} text,${Constants.COL_SARVCING} text,${Constants.COL_MINUTES} text,${Constants.COL_INGREDIANTS} text,${Constants.COL_IMAGEURL} text,${Constants.COL_CALORIES} text,${Constants.COL_view} text )';
-      print(sql);
       db.execute(sql);
       notifyListeners();
 
