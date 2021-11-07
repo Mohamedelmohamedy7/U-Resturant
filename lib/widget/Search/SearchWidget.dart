@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -53,8 +55,7 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
         });
       }
     } catch (e) {
-      print(e.toString());
-    }
+     }
   }
 
   var width;
@@ -76,9 +77,12 @@ class _SearchFilterWidgetState extends State<SearchFilterWidget> {
                   padding: EdgeInsets.only(
                       left: width * 0.01),
                   child: IconButton(
-                      onPressed: () =>Navigator.of(context).push(PageTransition(
+                      onPressed: () {
+                        Timer(Duration(seconds: 1), ()=>CircularProgressIndicator());
+                          Navigator.of(context).push(PageTransition(
                         type: PageTransitionType.rightToLeft,child: HomePage()
-                      )),
+                      ));
+                      },
                       icon: Icon(
                         Icons.arrow_back_ios_rounded,
                         color: primaryColor,

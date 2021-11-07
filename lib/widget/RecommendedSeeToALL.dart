@@ -9,12 +9,7 @@ import 'package:provider/provider.dart';
 
 import 'custem_Text.dart';
 
-class RecommendedAllToDayGrid extends StatefulWidget {
-  @override
-  _State createState() => _State();
-}
-
-class _State extends State<RecommendedAllToDayGrid> {
+class RecommendedAllToDayGrid extends StatelessWidget{
   Meal? meal;
 
   @override

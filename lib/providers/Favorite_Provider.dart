@@ -5,15 +5,7 @@ import 'package:food_app/StatelesssWidget/Constant.dart';
 import 'package:food_app/model/MealModel.dart';
 import 'package:sqflite/sqflite.dart';
 class FavoriteProvider extends ChangeNotifier{
-  static FavoriteProvider? _helper;
 
-  FavoriteProvider._instance();
-
-  factory FavoriteProvider() {
-    if (_helper == null) _helper = FavoriteProvider._instance();
-
-    return _helper!;
-  }
   Future<String> getDbPath() async {
     var dbPath = await getDatabasesPath();
     var favoriteDbPath = dbPath + "/" + Constants.DB_NAME;

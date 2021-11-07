@@ -17,11 +17,8 @@ class MealProviderRecommend extends ChangeNotifier {
               Meal.fromjson(value.docs[i].data() as Map<String, dynamic>));
         }
         notifyListeners();
-        print('_RecommendModel[0].id = ${_RecommendModel[0].calories}');
-      });
-    } catch (e) {
-      print(e);
-    }
+       });
+    } catch (e) {}
     notifyListeners();
   }
 }

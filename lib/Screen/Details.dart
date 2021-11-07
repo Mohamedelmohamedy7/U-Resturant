@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:food_app/StatelesssWidget/Constant.dart';
 import 'package:food_app/model/MealModel.dart';
 import 'package:food_app/widget/custem_Text.dart';
+import 'package:page_transition/page_transition.dart';
+
+import 'HomePage.dart';
 
 class Details extends StatefulWidget {
   Meal? model;
@@ -53,8 +56,9 @@ class _DetailsState extends State<Details> with TickerProviderStateMixin {
                     padding: EdgeInsets.only(
                         top: height * 0.002, left: width * 0.01),
                     child: IconButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        icon: Icon(
+                        onPressed: () =>Navigator.of(context).push(PageTransition(
+                            type: PageTransitionType.rightToLeft,child: HomePage()
+                        )),                        icon: Icon(
                           Icons.arrow_back_ios_rounded,
                           color: primaryColor,
                           size: 22,

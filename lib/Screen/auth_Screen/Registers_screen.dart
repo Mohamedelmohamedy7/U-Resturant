@@ -227,7 +227,7 @@ class _RegistersState extends State<Registers> {
                           fontSize: 13,
                         ),
                         suffixIcon: IconButton(
-                            icon: visable == true
+                            icon: visable == false
                                 ? Icon(Icons.visibility_off_outlined,
                                     size: 22, color: Colors.grey.shade400)
                                 : Icon(Icons.visibility_outlined,

@@ -2,13 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import '../StatelesssWidget/Constant.dart';
 
-class SplachScreen extends StatefulWidget {
-
-  @override
-  _splachScreenState createState() => _splachScreenState();
-}
-
-class _splachScreenState extends State<SplachScreen> {
+class SplachScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(

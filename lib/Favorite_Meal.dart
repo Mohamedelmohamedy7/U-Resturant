@@ -4,31 +4,21 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:food_app/Screen/HomePage.dart';
 import 'package:food_app/StatelesssWidget/Constant.dart';
 import 'package:food_app/providers/Favorite_Provider.dart';
-import 'package:food_app/widget/custem_Text.dart';
+ import 'package:food_app/widget/custem_Text.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 import 'Screen/Details.dart';
 import 'model/MealModel.dart';
 
-class FavoriteMeal extends StatefulWidget {
-  @override
-  _FaviriteMealState createState() => _FaviriteMealState();
-}
-
-class _FaviriteMealState extends State<FavoriteMeal> {
+class FavoriteMeal extends StatelessWidget{
   var width;
   var height;
-  FavoriteProvider _helper = FavoriteProvider();
-  List<Meal>? _meal = [];
-
-  @override
-  void initState() {
-    viewList();
-    super.initState();
-  }
+   List<Meal>? _meal = [];
 
   @override
   Widget build(BuildContext context) {
+    viewList(context);
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
     return WillPopScope(
@@ -265,7 +255,7 @@ class _FaviriteMealState extends State<FavoriteMeal> {
                                                   TextButton(
                                                       onPressed: () {
                                                         Meal meal = _meal![index];
-                                                        deleteAll(meal);
+                                                        deleteAll(meal,context);
                                                         Navigator.of(context).pop();
                                                         Fluttertoast.showToast(
                                                           msg: "Meal Is Removed",
@@ -310,18 +300,18 @@ class _FaviriteMealState extends State<FavoriteMeal> {
     );
   }
 
-  void viewList() {
-    _helper.viewData().then((value) {
-      setState(() {
+  void viewList(context) {
+    try {
+      Provider.of<FavoriteProvider>(context).viewData().then((value) {
         _meal = value;
       });
-    });
+    }catch(e){}
   }
 
-  void deleteAll(Meal meal) {
-    setState(() {
-      _helper.delete(meal);
-      viewList();
-    });
+  void deleteAll(Meal meal,context) {
+    try{
+      Provider.of<FavoriteProvider>(context,listen: false).delete(meal);
+      viewList(context);
+    }catch(e){}
   }
 }

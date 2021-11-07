@@ -9,14 +9,7 @@ import 'package:provider/provider.dart';
 import '../StatelesssWidget/Constant.dart';
 import 'custem_Text.dart';
 
-class RecommendedMeals extends StatefulWidget {
-  const RecommendedMeals({Key? key}) : super(key: key);
-
-  @override
-  _RecommendedMealsState createState() => _RecommendedMealsState();
-}
-
-class _RecommendedMealsState extends State<RecommendedMeals> {
+class RecommendedMeals extends StatelessWidget{
   var width;
   var height;
   Meal? meal;

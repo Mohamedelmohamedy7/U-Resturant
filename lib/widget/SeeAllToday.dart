@@ -9,12 +9,7 @@ import 'package:food_app/providers/MealProvider.dart';
 
 import 'custem_Text.dart';
 
-class SeeAllToDayGrid extends StatefulWidget {
-  @override
-  _State createState() => _State();
-}
-
-class _State extends State<SeeAllToDayGrid> {
+class SeeAllToDayGrid extends StatelessWidget{
   Meal? meal;
 
   @override

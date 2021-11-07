@@ -50,7 +50,6 @@ class _RegistersState extends State<LoginScreen> {
       }
       _showErrordialog(error_message);
     } catch (error) {
-      print(error);
       const error_message = "could not authenticate you ,try again later";
       _showErrordialog(error_message);
     }
@@ -131,7 +130,6 @@ class _RegistersState extends State<LoginScreen> {
                       }
                     },
                     onSaved: (val) {
-                      print(val);
                       _authData["email"] = val!.trim();
                     },
                     keyboardType: TextInputType.emailAddress,
